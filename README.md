@@ -49,7 +49,7 @@ Differential accessibility is analyzed using [PyDESeq2](https://github.com/owkin
 
 | File | Description |
 |---|---|
-| [`differential_accessibility_pyDESeq2.ipynb`](ATAC-seq/downstream/differential_accessibility_pyDESeq2.ipynb) | Merges IDR peaks, counts fragments from BAM files, performs PCA and differential accessibility analysis using PyDESeq2, and generates DAR tables and plots. |
+| [`differential_accessibility_pyDESeq2.ipynb`](ATAC-seq/downstream/differential_accessibility_pyDESeq2.ipynb) | Merges IDR peaks, counts fragments from BAM files, performs PCA and differential accessibility analysis using PyDESeq2, and identifies DARs using adjusted P-value < 0.05 and \|log2FC\| ≥ 0.5. |
 | [`run_HOMER.sh`](ATAC-seq/downstream/run_HOMER.sh) | Runs known transcription factor motif enrichment and genomic peak annotation for regions with increased and decreased accessibility. |
 | [`run_GREAT_GO_BP.R`](ATAC-seq/downstream/GREAT/run_GREAT_GO_BP.R) | Runs GO Biological Process enrichment using rGREAT and identifies region-to-gene associations for DARs in both directions. |
 | [`submit_GREAT.sh`](ATAC-seq/downstream/GREAT/submit_GREAT.sh) | Example SLURM script for submitting the GREAT analysis on an HPC cluster. |
