@@ -41,6 +41,34 @@ sbatch run_atac.sh
 
 The script generates one input JSON per sample, groups biological replicates within the same experiment, and submits the workflows through Caper. Results and logs are saved in the specified output directory.
 
+### Downstream analysis
+
+Differential accessibility is analyzed using [PyDESeq2](https://github.com/owkin/PyDESeq2), followed by motif enrichment with [HOMER](http://homer.ucsd.edu/homer/) and GO enrichment with [rGREAT](https://bioconductor.org/packages/rGREAT/).
+
+### Downstream files
+
+| File | Description |
+|---|---|
+| [`differential_accessibility_pyDESeq2.ipynb`](ATAC-seq/downstream/differential_accessibility_pyDESeq2.ipynb) | Merges IDR peaks, counts fragments from BAM files, performs PCA and differential accessibility analysis using PyDESeq2, and generates DAR tables and plots. |
+| [`run_HOMER.sh`](ATAC-seq/downstream/run_HOMER.sh) | Runs known transcription factor motif enrichment and genomic peak annotation for regions with increased and decreased accessibility. |
+| [`run_GREAT_GO_BP.R`](ATAC-seq/downstream/GREAT/run_GREAT_GO_BP.R) | Runs GO Biological Process enrichment using rGREAT and identifies region-to-gene associations for DARs in both directions. |
+| [`submit_GREAT.sh`](ATAC-seq/downstream/GREAT/submit_GREAT.sh) | Example SLURM script for submitting the GREAT analysis on an HPC cluster. |
+
+### Running downstream analyses
+
+**1.** Update the sample information, input paths, and conditions in the PyDESeq2 notebook.
+
+**2.** Prepare the DAR BED files, update the paths in `run_HOMER.sh`, and submit:
+
+```bash
+sbatch run_HOMER.sh
+```
+
+**3.** Update the paths in `run_GREAT_GO_BP.R` and the environment settings in `submit_GREAT.sh`, then submit:
+
+```bash
+sbatch submit_GREAT.sh
+```
 
 ## CUT&Tag / CUT&RUN
 
